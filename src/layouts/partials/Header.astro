@@ -1,0 +1,94 @@
+---
+import Logo from "@/layouts/components/Logo.astro";
+import menu from "@/config/menu.json";
+
+const pathname = Astro.url.pathname;
+
+export interface ChildNavigationLink {
+  name: string;
+  url: string;
+}
+
+export interface NavigationLink {
+  name: string;
+  url: string;
+  hasChildren?: boolean;
+  children?: ChildNavigationLink[];
+}
+
+const { main }: { main: NavigationLink[] } = menu;
+---
+
+<header class="header">
+  <nav class="navbar container">
+    <div class="navbar-left">
+      <Logo />
+    </div>
+
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      id="show-button"
+      for="nav-toggle"
+      class="order-2 flex cursor-pointer items-center md:hidden"
+    >
+      <svg class="h-6 fill-current" viewBox="0 0 20 20">
+        <title>Menu Open</title>
+        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+      </svg>
+    </label>
+    <label
+      id="hide-button"
+      for="nav-toggle"
+      class="order-2 cursor-pointer items-center md:hidden"
+    >
+      <svg class="h-6 fill-current" viewBox="0 0 20 20">
+        <title>Menu Close</title>
+        <polygon
+          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+          transform="rotate(45 10 10)"></polygon>
+      </svg>
+    </label>
+
+    <ul id="nav-menu" class="navbar-center">
+      {
+        main.map((menu) => (
+          <li class="nav-item">
+            <a
+              href={menu.url}
+              class:list={[
+                "nav-link",
+                "block",
+                { "nav-link-active": pathname === menu.url },
+              ]}
+            >
+              {menu.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="navbar-right">
+      <a
+        href="mailto:as5869@drexel.edu"
+        aria-label="Email Us"
+        class="text-white transition duration-200 hover:text-primary-hover"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-8 w-8"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+          />
+        </svg>
+      </a>
+    </div>
+  </nav>
+</header>

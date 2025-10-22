@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import config from "@/config/config.json";
+import { plainify } from "@/lib/utils/textConverter";
+import type { CollectionEntry } from "astro:content";
+
+const { summary_length } = config.settings;
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+const { post } = Astro.props;
+---
+
+<div class="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-lg">
+  {
+    post.data.image && (
+      <Image
+        src={post.data.image}
+        alt={post.data.title}
+        width={445}
+        height={230}
+        class="w-full object-cover"
+      />
+    )
+  }
+  <div class="flex flex-grow flex-col p-6">
+    <h3 class="mb-4 text-xl font-bold">
+      <a href={`/blog/${post.slug}`} class="hover:text-primary">
+        {post.data.title}
+      </a>
+    </h3>
+    <p class="mb-6 flex-grow text-text">
+      {plainify(post.data.description || post.body.slice(0, summary_length))}
+    </p>
+    <a href={`/blog/${post.slug}`} class="btn btn-primary mt-auto self-start">
+      Read More
+    </a>
+  </div>
+</div>

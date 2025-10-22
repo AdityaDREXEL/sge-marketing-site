@@ -1,0 +1,69 @@
+---
+import Social from "@/components/Social.astro";
+import config from "@/config/config.json";
+import menu from "@/config/menu.json";
+import social from "@/config/social.json";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+---
+
+<footer class="section pb-12 pt-16 footer-dark">
+  <div class="container">
+    {/* footer menu */}
+    <div class="row items-start">
+      {
+        menu.footer.map((col) => {
+          return (
+            <div class="mb-12 sm:col-6 lg:col-3">
+              <h2 class="h4 mb-6" set:html={markdownify(col.name)} />
+              <ul class="mt-6">
+                {col?.menu.map((item) => (
+                  <li class="mb-1">
+                    <a href={item.url} rel="">
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })
+      }
+      {/* Logo and social icons */}
+      <div class="mb-12 pt-0 sm:col-6 lg:col-3"> {/* Added pt-0 here */}
+        <a href="/" aria-label="Bigspring">
+          <Image
+            src={config.site.logo}
+            width={Number(config.site.logo_width)}
+            height={Number(config.site.logo_height)}
+            alt=""
+            class="mb-6"
+          />
+        </a>
+        <Social source={social} className="social-icons" />
+      </div>
+    </div>
+    {/* copyright section removed */}
+  </div>
+</footer>
+
+<style>
+  .footer-dark {
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* Default text color to white */
+  }
+  .footer-dark .h4 {
+    color: #ffffff; /* Keep headings white */
+  }
+  .footer-dark a {
+    color: #ffffff; /* Make links white by default */
+    transition: color 0.2s ease-in-out;
+  }
+  .footer-dark a:hover {
+    color: var(--color-primary-hover); /* Orange hover for links */
+  }
+  /* Ensure social icons also start white */
+  .footer-dark .social-icons a {
+    color: #ffffff;
+  }
+</style>

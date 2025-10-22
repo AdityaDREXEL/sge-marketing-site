@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import config from "@/config/config.json";
+const { src } = Astro.props;
+const {
+  logo,
+  logo_width,
+  logo_height,
+  logo_text,
+  title,
+}: {
+  logo: string;
+  logo_width: any;
+  logo_height: any;
+  logo_text: string;
+  title: string;
+} = config.site;
+---
+
+{/* The inline style attribute below is the final fix. 
+  It directly applies the width from your config.json file.
+*/}
+<a
+  href="/"
+  class="navbar-brand block"
+  style={`width: ${logo_width.replace("px", "")}px;`}
+>
+  {
+    src || logo ? (
+      <Image
+        width={logo_width.replace("px", "") * 2}
+        height={logo_height.replace("px", "") * 2}
+        src={src ? src : logo}
+        alt={title}
+        style={{
+          height: "auto",
+          width: "100%",
+        }}
+      />
+    ) : logo_text ? (
+      logo_text
+    ) : (
+      title
+    )
+  }
+</a>

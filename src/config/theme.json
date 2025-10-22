@@ -1,0 +1,29 @@
+{
+  "colors": {
+    "default": {
+      "theme_color": {
+        "primary": "#202327",
+        "primary_hover": "#F97316",
+        "body": "#ffffff",
+        "border": "#e5e7eb",
+        "light": "#f3f4f6",
+        "dark": "#000000",
+        "dark_hover": "#374151"
+      },
+      "text_color": {
+        "text": "#111827",
+        "text_dark": "#000000"
+      }
+    }
+  },
+  "fonts": {
+    "font_family": {
+      "primary": "Lora:wght@400;700",
+      "primary_type": "serif"
+    },
+    "font_size": {
+      "base": "16",
+      "scale": "1.2"
+    }
+  }
+}

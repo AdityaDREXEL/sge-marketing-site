@@ -1,0 +1,37 @@
+.header {
+  @apply sticky top-0 z-50 w-full bg-dark;
+}
+
+.navbar {
+  @apply container grid grid-cols-3 items-center;
+}
+
+.navbar-left {
+  @apply justify-self-start;
+}
+.navbar-center {
+  @apply hidden justify-self-center md:flex md:space-x-8;
+}
+.navbar-right {
+  @apply hidden justify-self-end md:flex;
+}
+
+/* Mobile toggler display */
+#show-button,
+#hide-button {
+  @apply justify-self-end;
+}
+
+.nav-link {
+  /* Base styles for all links: shape, font, and white text */
+  @apply block py-4 font-primary text-xl font-bold text-white transition;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  /* Both Hover and Active states get the orange underline */
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary-hover);
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+}
