@@ -10,7 +10,7 @@ import remarkToc from "remark-toc";
 // https://astro.build/config
 export default defineConfig({
   // Use your actual custom domain here
-  site: "https://sgemarketing.biz", // Replaced placeholder with your domain
+  site: "https://www.sgemarketing.biz", // Replaced placeholder with your domain
   trailingSlash: "never",
   vite: { plugins: [tailwindcss()] }, // Add the Vite plugin back here
   integrations: [
