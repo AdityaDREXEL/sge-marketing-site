@@ -39,14 +39,10 @@ const recentPosts = sortedPosts.slice(0, 3);
       )}
     </div>
 
-    <div class="hero-image-wrapper">
-      <Image
-        src="/images/header.png"
-        width={750}
-        height={420}
-        alt="Header Graphic"
-        class="w-full h-auto object-contain"
-      />
+    <div
+      class="hero-image-wrapper"
+      style={`background-image: url(${banner.image})`}
+    >
     </div>
   </section>
 
@@ -64,9 +60,7 @@ const recentPosts = sortedPosts.slice(0, 3);
       </div>
       <div class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
         {feature.features.map((item) => (
-          <div
-            class="feature-card group rounded-xl bg-white p-5 pb-8 text-center text-text-dark transition-colors duration-300 ease-in-out hover:bg-primary-hover hover:text-white"
-          >
+          <div class="feature-card group rounded-xl bg-white p-5 pb-8 text-center text-text-dark transition-colors duration-300 ease-in-out hover:bg-dark hover:text-text">
             {item.icon && (
               <div>
                 <Image
@@ -198,7 +192,8 @@ const recentPosts = sortedPosts.slice(0, 3);
 </Base>
 
 <script>
-  import { Swiper, Autoplay, Pagination } from "swiper";
+  import { Swiper } from "swiper";
+  import { Autoplay, Pagination } from "swiper/modules"; // Corrected import path
   import "swiper/css";
   import "swiper/css/pagination";
 
