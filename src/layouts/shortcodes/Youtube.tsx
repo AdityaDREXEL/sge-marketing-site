@@ -1,7 +1,8 @@
 import React from "react";
-import LiteYouTubeEmbed from 'react-lite-youtube-embed'; // Remove the curly braces {}
+import * as YouTubeEmbed from 'react-lite-youtube-embed';
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
+const LiteYouTubeEmbed = YouTubeEmbed.default; // Explicitly access the default export if it exists this way
 const Youtube = ({
   id,
   title,
