@@ -2,12 +2,18 @@ name: Deploy Astro site to Pages
 
 on:
   push:
-    branches: [main] # Trigger on push to main
+    branches: [main] # Or your default branch name
   workflow_dispatch:
 
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
+# Add these permissions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -18,16 +24,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "20" # Match your Node version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        run: npm ci # Use ci for cleaner installs
       - name: Build with Astro
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./dist # Path to Astro's build output directory
 
   deploy:
     needs: build
