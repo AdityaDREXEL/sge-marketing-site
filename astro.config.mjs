@@ -10,7 +10,7 @@ import remarkToc from "remark-toc";
 // https://astro.build/config
 export default defineConfig({
   site: "https://adityadrexel.github.io", // GitHub Pages domain
-  base: "/sge-analytics-website/",      // Your repository name
+  base: "/sge-marketing-site/",      // Your repository name
   trailingSlash: "never",
   vite: { plugins: [tailwindcss()] },
   integrations: [
