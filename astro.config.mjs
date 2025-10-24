@@ -1,7 +1,7 @@
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwindcss from "@tailwindcss/vite"; // Use the Vite plugin again
+import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
 import remarkCollapse from "remark-collapse";
@@ -9,12 +9,12 @@ import remarkToc from "remark-toc";
 
 // https://astro.build/config
 export default defineConfig({
-  // Use your actual custom domain here
-  site: "https://www.sgemarketing.biz", // Replaced placeholder with your domain
+  // Configure for GitHub Pages URL
+  site: "https://adityadrexel.github.io", // Your GitHub Pages domain
+  base: "/sge-analytics-website/",      // Your repository name
   trailingSlash: "never",
-  vite: { plugins: [tailwindcss()] }, // Add the Vite plugin back here
+  vite: { plugins: [tailwindcss()] },
   integrations: [
-    // Removed tailwind() integration
     react(),
     sitemap(),
     AutoImport({
