@@ -9,8 +9,8 @@ import remarkToc from "remark-toc";
 
 // https://astro.build/config
 export default defineConfig({
-  // Use your actual custom domain here
-  site: "https://www.sgemarketing.biz", // Replaced placeholder with your domain
+  site: "https://adityadrexel.github.io", // GitHub Pages domain
+  base: "/sge-analytics-website/",      // Your repository name
   trailingSlash: "never",
   vite: { plugins: [tailwindcss()] }, // Add the Vite plugin back here
   integrations: [
