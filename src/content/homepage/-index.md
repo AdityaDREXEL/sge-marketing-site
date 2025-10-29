@@ -1,102 +1,264 @@
 ---
-banner:
-  title: "Data-Driven Digital Marketing for Measurable Growth"
-  content: |
-    <p>We build your brand and drive results through comprehensive digital solutions, including:</p>
-    <ul class='list-disc pl-5 mt-4 text-left max-w-lg mx-auto md:mx-0'>
-      <li class='mb-2'>Cutting-Edge SEO & SGE Strategy</li>
-      <li class='mb-2'>High-Performance Website Development</li>
-      <li class='mb-2'>Engaging Content Creation</li>
-      <li class='mb-2'>Advanced Data Analytics</li>
-      <li class='mb-2'>Facebook and Google Ads Management</li>
-      <li>Google Analytics</li>
-    </ul>
-  image: /images/banner-art.png
-  button:
-    enable: false # Button disabled in hero as requested
-    label: "Contact Us"
-    link: "/contact"
+import { Image } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+import Cta from "@/layouts/components/Cta.astro";
+import Post from "@/layouts/partials/Post.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-# feature
-feature:
-  title: "Our Core Services"
-  features:
-    - name: "SEO & SGE Strategy"
-      icon: "/images/speedometer.svg"
-      content: "Dominate search results with strategies built for today's and tomorrow's search engines."
-    - name: "Data-Driven Analytics"
-      icon: "/images/cloud.svg"
-      content: "We turn raw data into actionable insights for continuous growth and improved ROI."
-    - name: "Website Development"
-      icon: "/images/code.svg"
-      content: "High-performance, secure, and SEO-optimized websites that convert visitors into customers."
-    - name: "Online Presence & Content"
-      icon: "/images/user-clock.svg"
-      content: "Building your brand's authority and voice through targeted content and online engagement."
-    - name: "Strategic Ad Campaigns"
-      icon: "/images/oop.svg"
-      content: "Maximize your reach and budget with precisely targeted advertising on major platforms."
-    - name: "Comprehensive Reporting"
-      icon: "/images/love.svg"
-      content: "Transparent and easy-to-understand reports that show you exactly what is working."
+// Fetch content for the homepage sections
+const homepage = await getEntry("homepage", "-index");
 
-# services
-services:
-  - title: "Full-Service SEO and SGE Optimization"
-    content: "From technical audits and keyword research to link building and preparing for the Search Generative Experience, we cover all aspects to boost your organic visibility."
-    images:
-      - "/images/service-slide-1.png"
-      - "/images/service-slide-2.png"
-      - "/images/service-slide-3.png"
-    button:
-      enable: true
-      label: Learn More
-      link: /services
+// Add a check to ensure the homepage content exists
+if (!homepage) {
+  throw new Error(
+    "Homepage content not found. Please ensure 'src/content/homepage/-index.md' exists.",
+  );
+}
 
-  - title: "Advanced Analytics & Reporting"
-    content: "We implement and manage robust analytics systems to track performance, measure KPIs, and provide clear, actionable reports that guide your business decisions."
-    images:
-      - "/images/service-slide-1.png"
-    button:
-      enable: true
-      label: Learn More
-      link: /services
+const { banner, feature, services, workflow, call_to_action } =
+  homepage.data;
 
-  - title: "High-Performance Website Development"
-    content: "We design and build fast, secure, and user-friendly websites optimized for search engines and conversions. Using modern technologies, we create platforms that grow with your business."
-    images:
-      - "/images/service-slide-1.png"
-      - "/images/service-slide-2.png"
-      - "/images/service-slide-3.png"
-    button:
-      enable: true
-      label: See Our Work
-      link: /contact # Update link if you have a portfolio page
-
-  - title: "Strategic Digital Advertising"
-    content: "Reach your target audience effectively with data-driven ad campaigns on platforms like Google and Meta. We manage everything from targeting and budget optimization to creative and performance tracking."
-    images:
-      - "/images/service-slide-1.png"
-      - "/images/service-slide-2.png"
-      - "/images/service-slide-3.png"
-    button:
-      enable: true
-      label: Get Started
-      link: /contact
-
-# workflow
-workflow:
-  title: "A Proven Process for Delivering Results"
-  image: "/images/banner.png"
-  description: ""
-
-# call_to_action
-call_to_action:
-  title: "Ready to grow your online presence?"
-  content: "Let's discuss your goals and how SGE Analytics can help you achieve them. Reach out today for a consultation."
-  image: "/images/cta.png"
-  button:
-    enable: true
-    label: "Contact Us"
-    link: "/contact"
+// Fetch and sort the latest 3 blog posts
+const posts = await getSinglePage("blog");
+const sortedPosts = sortByDate(posts);
+const recentPosts = sortedPosts.slice(0, 3);
 ---
+
+<Base>
+  {/* Banner Section - Split Layout */}
+  <section class="hero-section">
+    {/* Left Side: Text Content */}
+    <div class="hero-content-wrapper">
+      <h1 class="font-primary font-bold">{banner?.title}</h1>
+      {banner?.content && (
+        <div
+          class="mt-4 text-text-dark hero-content"
+          set:html={banner.content}
+        />
+      )}
+      {/* Button removed from here as per previous request */}
+    </div>
+    {/* Right Side: Image Background */}
+    <div
+      class="hero-image-wrapper"
+      >
+      {/* Image removed from here */}
+    </div>
+  </section>
+
+  {/* CTA Bar */}
+  <a
+    href={banner?.button?.link ?? '/contact'}
+    class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
+  >
+    {banner?.button?.label ?? 'Contact Us'}
+  </a>
+
+  {/* Features Section (Our Core Services) */}
+  <section class="section bg-light py-16 md:py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center">
+        <h2 class="font-primary font-bold text-3xl md:text-4xl">{feature?.title}</h2>
+      </div>
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {feature?.features?.map((item) => (
+          <div
+            class="feature-card group rounded-xl bg-white p-6 pb-8 text-center text-text transition-colors duration-300 ease-in-out hover:bg-primary-hover hover:text-white"
+          >
+            {item.icon && (
+              <div>
+                <img
+                  class="mx-auto h-10 w-10"
+                  alt={item.name}
+                  src={item.icon}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <div class="mt-4">
+              <p class="h5 font-primary font-bold text-xl">{item.name}</p>
+              <p class="mt-3 text-base">{item.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Services Section */}
+  {
+    services?.map((service, index) => {
+      const isOdd = index % 2 > 0;
+      return (
+        <section class={`section ${isOdd && "bg-light"}`}>
+          <div class="container">
+            <div class="items-center gap-8 md:grid md:grid-cols-2">
+              <div class={`service-carousel ${!isOdd && "md:order-2"}`}>
+                {service?.images?.length > 1 ? (
+                  <div class="swiper">
+                    <div class="swiper-wrapper">
+                      {service.images?.map((image) => (
+                        <div class="swiper-slide">
+                          <Image
+                            class="mx-auto"
+                            src={image}
+                            width={538}
+                            height={328}
+                            alt=""
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div class="pagination" />
+                  </div>
+                ) : (
+                  <Image
+                    class="mx-auto"
+                    src={service?.images?.[0]}
+                    width={538}
+                    height={328}
+                    alt=""
+                  />
+                )}
+              </div>
+
+              <div
+                class={`service-content mt-5 md:mt-0 ${!isOdd && "md:order-1"}`}
+              >
+                <h2 class="font-bold leading-[40px]">{service?.title}</h2>
+                <p class="mt-4 mb-2">{service?.content}</p>
+                {service?.button?.enable && (
+                  <a
+                    href={service?.button.link}
+                    class="cta-link inline-flex items-center text-primary"
+                  >
+                    {service?.button.label}
+                    <img
+                      class="ml-1"
+                      src="/images/arrow-right.svg"
+                      width={18}
+                      height={14}
+                      alt="arrow"
+                    />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  {/* Workflow Section */}
+  <section class="section pb-0">
+    <div class="mb-8 text-center">
+      <h2
+        class="mx-auto max-w-[400px] font-bold leading-[44px]"
+      >{workflow?.title}</h2>
+      <p class="mt-3">{workflow?.description}</p>
+    </div>
+    {/* Workflow Image was here, now removed */}
+  </section>
+
+  {/* Recent Blog Posts Section */}
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2>Latest Insights</h2>
+        <p class="mt-4">
+          Stay updated with the latest news and strategies in digital marketing.
+        </p>
+      </div>
+      <div class="row mt-12 justify-center">
+        {recentPosts.map((post) => (
+          <div class="col-12 mb-8 sm:col-6 lg:col-4">
+            <Post post={post} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Call to Action Section */}
+  <Cta cta={call_to_action} />
+
+</Base>
+
+<script>
+  import { Swiper } from "swiper";
+  import { Autoplay, Pagination } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/pagination";
+
+  document.addEventListener("astro:page-load", () => {
+    const carousels = document.querySelectorAll(".service-carousel .swiper");
+    if (carousels.length > 0) {
+      new Swiper(".service-carousel .swiper", {
+        modules: [Pagination, Autoplay],
+        pagination: {
+          type: "bullets",
+          el: ".service-carousel .pagination",
+          clickable: true,
+        },
+      });
+    }
+  });
+</script>
+
+{/* Custom CSS for Hero Section */}
+<style>
+  .hero-content {
+    font-family: var(--font-accent, serif);
+    font-weight: 400;
+  }
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .hero-content-wrapper {
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .hero-image-wrapper {
+    display: none; /* Hidden on mobile by default */
+    background-color: #2d3238; /* Dark Grey background */
+    /* background-image: url(/images/header.png); /* <-- THIS LINE IS NOW REMOVED */
+    background-size: cover;
+    background-position: center;
+    display: flex; /* Ensure it's displayed on desktop */
+    justify-content: center;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .hero-section {
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-content-wrapper {
+      padding: 5rem;
+      text-align: left;
+    }
+    .hero-image-wrapper {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      min-height: 40vh;
+    }
+  }
+  /* Basic container/section styles if needed */
+  .container {
+     max-width: 1140px;
+     margin-left: auto;
+     margin-right: auto;
+     padding-left: 1rem;
+     padding-right: 1rem;
+  }
+   .section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+  }
+</style>

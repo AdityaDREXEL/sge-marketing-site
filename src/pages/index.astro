@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import Base from "@/layouts/Base.astro";
-import Cta from "@/layouts/components/Cta.astro";
-import Post from "@/layouts/partials/Post.astro";
-import { getSinglePage } from "@/lib/contentParser.astro";
-import { sortByDate } from "@/lib/utils/sortFunctions";
+import Base from "@/layouts/Base.astro"; // Correct path in original project
+import Cta from "@/layouts/components/Cta.astro"; // Assuming this exists in original project
+import Post from "@/layouts/partials/Post.astro"; // Assuming this exists in original project
+import { getSinglePage } from "@/lib/contentParser.astro"; // Assuming this exists in original project
+import { sortByDate } from "@/lib/utils/sortFunctions"; // Assuming this exists in original project
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -28,7 +28,9 @@ const recentPosts = sortedPosts.slice(0, 3);
 ---
 
 <Base>
+  {/* Banner Section - Split Layout */}
   <section class="hero-section">
+    {/* Left Side: Text Content */}
     <div class="hero-content-wrapper">
       <h1 class="font-primary font-bold">{banner?.title}</h1>
       {banner?.content && (
@@ -37,44 +39,49 @@ const recentPosts = sortedPosts.slice(0, 3);
           set:html={banner.content}
         />
       )}
+      {/* Button removed from here as per previous request */}
     </div>
-
+    {/* Right Side: Image Background */}
     <div
       class="hero-image-wrapper"
-      style={`background-image: url(${banner.image})`}
+      style={`background-image: url(/images/header.png)`} {/* Using header.png */}
     >
     </div>
   </section>
 
+  {/* CTA Bar */}
   <a
-    href={banner.button.link}
+    href={banner?.button?.link ?? '/contact'}
     class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
   >
-    {banner.button.label}
+    {banner?.button?.label ?? 'Contact Us'}
   </a>
 
-  <section class="section bg-light">
-    <div class="container">
+  {/* Features Section (Our Core Services) */}
+  <section class="section bg-light py-16 md:py-20"> {/* Added padding */}
+    <div class="container mx-auto px-4"> {/* Added container */}
       <div class="text-center">
-        <h2>{feature.title}</h2>
+        <h2 class="font-primary font-bold text-3xl md:text-4xl">{feature?.title}</h2>
       </div>
-      <div class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-        {feature.features.map((item) => (
-          <div class="feature-card group rounded-xl bg-white p-5 pb-8 text-center text-text-dark transition-colors duration-300 ease-in-out hover:bg-dark hover:text-text">
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"> {/* Adjusted mt */}
+        {feature?.features?.map((item) => (
+          <div
+            class="feature-card group rounded-xl bg-white p-6 pb-8 text-center text-text transition-colors duration-300 ease-in-out hover:bg-primary-hover hover:text-white" {/* Orange hover */}
+          >
             {item.icon && (
               <div>
-                <Image
-                  class="mx-auto"
+                <img
+                  class="mx-auto h-10 w-10"
                   alt={item.name}
                   src={item.icon}
-                  width={40}
-                  height={40}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             )}
             <div class="mt-4">
-              <p class="h5 font-bold">{item.name}</p>
-              <p class="mt-3">{item.content}</p>
+              <p class="h5 font-primary font-bold text-xl">{item.name}</p>
+              <p class="mt-3 text-base">{item.content}</p>
             </div>
           </div>
         ))}
@@ -82,15 +89,16 @@ const recentPosts = sortedPosts.slice(0, 3);
     </div>
   </section>
 
+  {/* Services Section (Keep original template structure) */}
   {
-    services!.map((service, index) => {
+    services?.map((service, index) => {
       const isOdd = index % 2 > 0;
       return (
         <section class={`section ${isOdd && "bg-light"}`}>
           <div class="container">
             <div class="items-center gap-8 md:grid md:grid-cols-2">
               <div class={`service-carousel ${!isOdd && "md:order-2"}`}>
-                {service!.images!.length > 1 ? (
+                {service?.images?.length > 1 ? (
                   <div class="swiper">
                     <div class="swiper-wrapper">
                       {service.images?.map((image) => (
@@ -110,7 +118,7 @@ const recentPosts = sortedPosts.slice(0, 3);
                 ) : (
                   <Image
                     class="mx-auto"
-                    src={service!.images![0]}
+                    src={service?.images?.[0]}
                     width={538}
                     height={328}
                     alt=""
@@ -118,7 +126,6 @@ const recentPosts = sortedPosts.slice(0, 3);
                 )}
               </div>
 
-              {/* Content */}
               <div
                 class={`service-content mt-5 md:mt-0 ${!isOdd && "md:order-1"}`}
               >
@@ -146,6 +153,8 @@ const recentPosts = sortedPosts.slice(0, 3);
       );
     })
   }
+
+  {/* Workflow Section (Keep original template structure - Image Removed) */}
   <section class="section pb-0">
     <div class="mb-8 text-center">
       <h2
@@ -153,14 +162,10 @@ const recentPosts = sortedPosts.slice(0, 3);
       >{workflow?.title}</h2>
       <p class="mt-3">{workflow?.description}</p>
     </div>
-    <Image
-      src={workflow!.image}
-      alt="workflow image"
-      width={1920}
-      height={414}
-    />
+    {/* Removed the Image component that was here */}
   </section>
 
+  {/* Recent Blog Posts Section (Keep original template structure) */}
   <section class="section">
     <div class="container">
       <div class="text-center">
@@ -172,23 +177,17 @@ const recentPosts = sortedPosts.slice(0, 3);
       <div class="row mt-12 justify-center">
         {recentPosts.map((post) => (
           <div class="col-12 mb-8 sm:col-6 lg:col-4">
-            <Post post={post} />
+            <Post post={post} /> {/* Assumes Post component exists and works */}
           </div>
         ))}
       </div>
-      {/* Removed the div wrapper around the button */}
+       {/* Removed the extra "View All Posts" bar */}
     </div>
   </section>
 
-  {/* New full-width bar for "View All Posts" */}
-  <a
-    href="/blog"
-    class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
-  >
-    View All Posts
-  </a>
+  {/* Call to Action Section (Keep original template structure) */}
+  <Cta cta={call_to_action} /> {/* Assumes Cta component exists and works */}
 
-  <Cta cta={call_to_action} />
 </Base>
 
 <script>
@@ -199,64 +198,72 @@ const recentPosts = sortedPosts.slice(0, 3);
 
   // astro:page-load event is fired when the page is loaded
   document.addEventListener("astro:page-load", () => {
-    new Swiper(".service-carousel .swiper", {
-      modules: [Pagination, Autoplay],
-      pagination: {
-        type: "bullets",
-        el: ".service-carousel .pagination",
-        clickable: true,
-      },
-    });
+    // Check if Swiper elements exist before initializing
+    const carousels = document.querySelectorAll(".service-carousel .swiper");
+    if (carousels.length > 0) {
+      new Swiper(".service-carousel .swiper", {
+        modules: [Pagination, Autoplay],
+        pagination: {
+          type: "bullets",
+          el: ".service-carousel .pagination",
+          clickable: true,
+        },
+      });
+    }
   });
 </script>
 
+{/* Custom CSS for Hero Section */}
 <style>
   .hero-content {
-    font-family: var(--font-accent), cursive;
+    font-family: var(--font-accent, serif);
     font-weight: 400;
   }
-
-  /* Custom CSS Grid for the Hero Section */
   .hero-section {
     display: grid;
-    grid-template-columns: 1fr; /* One column on mobile */
+    grid-template-columns: 1fr;
   }
-
   .hero-content-wrapper {
-    padding: 5rem 2rem; /* Vertical and horizontal padding for mobile */
+    padding: 5rem 2rem;
     text-align: center;
   }
-
   .hero-image-wrapper {
-    display: none; /* Hide image on mobile by default */
+    display: none;
     background-color: #2d3238; /* Dark Grey background */
-    display: flex; /* Use flexbox to center the image */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-
-  /* Apply 2-column grid on screens 768px and wider (desktop) */
   @media (min-width: 768px) {
     .hero-section {
-      grid-template-columns: 1fr 1fr; /* Two equal columns */
+      grid-template-columns: 1fr 1fr;
     }
-
     .hero-content-wrapper {
       padding: 5rem;
       text-align: left;
     }
-
     .hero-image-wrapper {
-      display: flex; /* Show image wrapper on desktop */
+      display: flex;
       width: 100%;
       height: 100%;
       min-height: 40vh;
-      /* Remove background-size, background-position for the wrapper */
     }
     .hero-image-wrapper img {
-      max-width: 100%; /* Ensure image doesn't overflow */
+      max-width: 100%;
       max-height: 100%;
-      object-fit: contain; /* Contain the image within its bounds */
+      object-fit: contain;
     }
+  }
+  /* Basic container/section styles if needed */
+  .container {
+     max-width: 1140px;
+     margin-left: auto;
+     margin-right: auto;
+     padding-left: 1rem; /* Add some padding */
+     padding-right: 1rem; /* Add some padding */
+  }
+   .section {
+      padding-top: 4rem; /* Add vertical padding */
+      padding-bottom: 4rem; /* Add vertical padding */
   }
 </style>
