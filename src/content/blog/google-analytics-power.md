@@ -2,7 +2,7 @@
 title: "Unlocking Growth with Google Analytics 4"
 date: 2025-08-05
 author: "SGE Analytics Team"
-image: "/images/service-slide-1.png" # Placeholder image
+image: "/images/gana.webp" # Placeholder image
 description: "Move beyond page views. We explore how to use Google Analytics 4 to understand user behavior, track conversions, and make smarter business decisions."
 ---
 

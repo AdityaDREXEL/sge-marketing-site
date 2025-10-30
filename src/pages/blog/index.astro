@@ -1,74 +1,45 @@
 ---
-import config from "@/config/config.json";
-import Base from "@/layouts/Base.astro";
-import Pagination from "@/layouts/components/Pagination.astro";
-import Post from "@/layouts/partials/Post.astro";
 import { Image } from "astro:assets";
-import { getCollection, type CollectionEntry } from "astro:content"; // Import the CollectionEntry type
+import Base from "@/layouts/Base.astro"; // Use original layout
+import Post from "@/layouts/partials/Post.astro"; // Use original Post partial
+import Pagination from "@/layouts/components/Pagination.astro"; // Use original Pagination
+import { getSinglePage } from "@/lib/contentParser.astro"; // Use original lib functions
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import { getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import config from "@/config/config.json";
 
-// 1. Get all posts using Astro's standard getCollection function
-const allPosts = await getCollection("blog");
+// Fetch all blog posts
+const posts = await getSinglePage("blog");
+const sortedPosts = sortByDate(posts);
 
-// 2. Filter out the special '-index.md' file, adding type info for `post`
-const posts = allPosts.filter(
-  (post: CollectionEntry<"blog">) => post.slug !== "-index",
-);
-
-// 3. Sort all posts by date, adding type info for `a` and `b`
-const sortedPosts = posts.sort(
-  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-    new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
-);
-
-// 4. Set up pagination
+// Pagination
 const totalPages = Math.ceil(posts.length / config.settings.pagination);
-const currentPosts = sortedPosts.slice(0, config.settings.pagination);
+const currentPosts = sortedPosts.slice(0, config.settings.pagination); // Show first page
 ---
 
-<Base title="SGE Analytics Blog">
+<Base>
   <section class="section">
     <div class="container">
-      <h1 class="text-center font-normal lg:text-[56px]">
-        SGE Analytics Blog
-      </h1>
-      <div class="row pb-12">
-        <div class="row col-12 pb-24 pt-16">
-          <div class="md:col-6">
-            {currentPosts[0].data.image && (
-              <Image
-                class="rounded-lg"
-                src={currentPosts[0].data.image}
-                alt={currentPosts[0].data.title}
-                width={925}
-                height={475}
-              />
-            )}
-          </div>
-          <div class="md:col-6">
-            <h2 class="h3 mb-2 mt-4">
-              <a
-                href={`/blog/${currentPosts[0].slug}`}
-                class="block hover:text-primary"
-              >
-                {currentPosts[0].data.title}
-              </a>
-            </h2>
-            <p>{currentPosts[0].data.description}</p>
-            <a
-              class="btn btn-primary mt-4"
-              href={`/blog/${currentPosts[0].slug}`}
-              rel=""
-            >
-              Read More
-            </a>
-          </div>
-        </div>
-        {currentPosts.slice(1).map((post) => (
+      <div class="text-center">
+        <h1 class="font-primary font-bold text-4xl md:text-5xl">
+          SGE Analytics Blog
+        </h1>
+        <p class="mt-4 text-lg">
+          Latest insights on digital marketing, SEO, and data-driven strategies.
+        </p>
+      </div>
+
+      {/* Main Post Grid */}
+      <div class="row mt-16 justify-center">
+        {currentPosts.map((post) => (
           <div class="col-12 mb-8 sm:col-6 lg:col-4">
             <Post post={post} />
           </div>
         ))}
       </div>
+
+      {/* Pagination */}
       <Pagination section={"blog"} currentPage={1} totalPages={totalPages} />
     </div>
   </section>

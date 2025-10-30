@@ -1,29 +1,59 @@
 ---
+import { Image } from "astro:assets";
 import Base from "@/layouts/Base.astro";
-import PostSingle from "@/layouts/PostSingle.astro";
-import { getSinglePage } from "@/lib/contentParser.astro";
+import { getSinglePage } from "@/lib/contentParser.astro"; // Use template's function
+import { markdownify } from "@/lib/utils/textConverter";
 
+// This function tells Astro to build a page for every blog post
 export async function getStaticPaths() {
-  const posts = await getSinglePage("blog");
-
-  const paths = posts.map((post) => ({
-    params: {
-      single: post.id,
-    },
+  const posts = await getSinglePage("blog"); // Use template's function
+  return posts.map((post) => ({
+    params: { single: post.id }, // Use post.id
     props: { post },
   }));
-  return paths;
 }
 
 const { post } = Astro.props;
-const { title, meta_title, description, image } = post.data;
+// We don't use .render() because post.body is already HTML from getSinglePage
 ---
 
-<Base
-  title={title}
-  meta_title={meta_title}
-  description={description}
-  image={image}
->
-  <PostSingle post={post} />
+<Base title={post.data.title} description={post.data.description}>
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        <article class="col-12 max-w-4xl">
+          {/* Post Header: Title and Image */}
+          <h1 class="font-primary font-bold text-4xl md:text-5xl mb-6">
+            {post.data.title}
+          </h1>
+          {post.data.image && (
+            <Image
+              src={post.data.image}
+              width={1000}
+              height={500}
+              alt={post.data.title}
+              class="rounded-lg mb-6 w-full object-cover"
+            />
+          )}
+
+          {/* Post Meta (Date) */}
+          <div class="mb-8">
+            <p class="text-gray-600">
+              Published on: {new Date(post.data.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+          </div>
+
+          {/* Post Content */}
+          <div
+            class="content prose max-w-none"
+            set:html={post.body} {/* Use set:html with post.body */}
+          />
+        </article>
+      </div>
+    </div>
+  </section>
 </Base>
