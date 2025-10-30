@@ -1,15 +1,16 @@
 ---
-import Social from "@/components/Social.astro";
-import config from "@/config/config.json";
-import menu from "@/config/menu.json";
-import social from "@/config/social.json";
-import { markdownify } from "@/lib/utils/textConverter";
+import Social from "@/components/Social.astro"; // Use correct path if needed
+import config from "@/config/config.json"; // Use relative path if needed
+import menu from "@/config/menu.json"; // Use relative path if needed
+import social from "@/config/social.json"; // Use relative path if needed
+import { markdownify } from "@/lib/utils/textConverter"; // Use relative path if needed
 import { Image } from "astro:assets";
+
+const { logo, logo_width } = config.site; // Get only needed props
 ---
 
 <footer class="section pb-12 pt-16 footer-dark">
   <div class="container">
-    {/* footer menu */}
     <div class="row items-start">
       {
         menu.footer.map((col) => {
@@ -29,41 +30,58 @@ import { Image } from "astro:assets";
           );
         })
       }
-      {/* Logo and social icons */}
-      <div class="mb-12 pt-0 sm:col-6 lg:col-3"> {/* Added pt-0 here */}
+      <div class="mb-12 pt-0 sm:col-6 lg:col-3">
         <a href="/" aria-label="Bigspring">
           <Image
-            src={config.site.logo}
-            width={Number(config.site.logo_width)}
-            height={Number(config.site.logo_height)}
-            alt=""
+            src={logo}
+            width={Number(logo_width.replace("px", "") * 2)} {/* Required prop */}
+            height={100} {/* Placeholder height, style overrides */}
+            alt="SGE Analytics Logo"
             class="mb-6"
+            style={`width: ${logo_width.replace("px", "")}px; height: auto; display: block;`} {/* Ensure correct aspect ratio */}
           />
         </a>
         <Social source={social} className="social-icons" />
       </div>
     </div>
-    {/* copyright section removed */}
   </div>
 </footer>
 
 <style>
   .footer-dark {
-    background-color: #000000; /* Black background */
-    color: #ffffff; /* Default text color to white */
+    background-color: #000000;
+    color: #ffffff;
   }
   .footer-dark .h4 {
-    color: #ffffff; /* Keep headings white */
+    color: #ffffff;
   }
   .footer-dark a {
-    color: #ffffff; /* Make links white by default */
+    color: #ffffff;
     transition: color 0.2s ease-in-out;
   }
   .footer-dark a:hover {
-    color: var(--color-primary-hover); /* Orange hover for links */
+    color: var(--color-primary-hover);
   }
-  /* Ensure social icons also start white */
   .footer-dark .social-icons a {
     color: #ffffff;
+  }
+   /* Basic grid column setup */
+  .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -1rem;
+      margin-right: -1rem;
+  }
+  .sm\:col-6 {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
+  .lg\:col-3 {
+     @media (min-width: 1024px) {
+        flex: 0 0 25%;
+        max-width: 25%;
+     }
   }
 </style>

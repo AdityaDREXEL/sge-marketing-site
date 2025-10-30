@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "Bigspring Light Astro",
-    "base_url": "https://bigspring-light-astro.vercel.app",
+    "title": "SGE Analytics",
+    "base_url": "https://www.sgemarketing.biz",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
+    "favicon": "/images/logo.png",
     "logo": "/images/logo.png",
-    "logo_width": "400",
-    "logo_height": "38",
-    "logo_text": "Astroplate"
+    "logo_width": "125",
+    "logo_height": "auto",
+    "logo_text": "SGE Analytics"
   },
 
   "settings": {
@@ -25,13 +25,13 @@
   "params": {
     "contact_form_action": "",
     "tag_manager_id": "",
-    "footer_content": "Lorem ipsum dolor sit amet, consectetur elit. Consjat tristique eget amet, tempus eu at cttur.",
-    "copyright": "Designed and Developed By [Themefisher](https://themefisher.com/)"
+    "footer_content": "SGE Analytics specializes in comprehensive digital strategies to elevate your online presence and drive measurable results.",
+    "copyright": "Copyright © 2025 SGE Analytics"
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "SGE Analytics",
     "meta_image": "/images/og-image.png",
-    "meta_description": "astro boilerplate"
+    "meta_description": "Data-Driven Digital Marketing for Measurable Growth. We specialize in SEO, SGE, website development, and advanced analytics."
   }
 }

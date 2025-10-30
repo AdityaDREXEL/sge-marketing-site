@@ -1,41 +1,39 @@
 ---
 import { Image } from "astro:assets";
-import config from "@/config/config.json";
+import config from "@/config/config.json"; // Adjust path if needed: ../../config/config.json
 const { src } = Astro.props;
 const {
   logo,
   logo_width,
-  logo_height,
+  // logo_height, // Removed - not needed from config
   logo_text,
   title,
 }: {
   logo: string;
   logo_width: any;
-  logo_height: any;
+  logo_height?: any; // Make optional
   logo_text: string;
   title: string;
 } = config.site;
+
+// Clean up width value, provide a default if invalid
+const displayWidth = logo_width ? String(logo_width).replace("px", "") : "150"; // Default to 150px
+const optimizationWidth = Number(displayWidth) * 2; // For higher resolution source
+
 ---
 
-{/* The inline style attribute below is the final fix. 
-  It directly applies the width from your config.json file.
-*/}
-<a
-  href="/"
-  class="navbar-brand block"
-  style={`width: ${logo_width.replace("px", "")}px;`}
->
+{/* Applying width via style to the container */}
+<a href="/" class="navbar-brand block" style={`width: ${displayWidth}px;`}>
   {
     src || logo ? (
       <Image
-        width={logo_width.replace("px", "") * 2}
-        height={logo_height.replace("px", "") * 2}
         src={src ? src : logo}
         alt={title}
-        style={{
-          height: "auto",
-          width: "100%",
-        }}
+        width={optimizationWidth} {/* Required prop, used for optimization */}
+        height={Math.round(optimizationWidth / 2)} {/* Estimate height based on common aspect ratios, style overrides */}
+        loading="lazy"
+        decoding="async"
+        style="height: auto; width: 100%; display: block;" {/* Style ensures correct aspect ratio */}
       />
     ) : logo_text ? (
       logo_text

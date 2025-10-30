@@ -49,7 +49,7 @@ const homepageCollection = defineCollection({
       .object({
         title: z.string().optional(),
         description: z.string().optional(),
-        image: z.string(),
+        image: z.string().optional(), // <-- CHANGED THIS LINE
       })
       .optional(),
     call_to_action: z
