@@ -2,7 +2,7 @@
 title: "What is Google's SGE and How to Prepare for It"
 date: 2025-08-10
 author: "SGE Analytics Team"
-image: "/images/service-slide-2.png" # Placeholder image
+image: "/images/sge.jpeg" # Placeholder image
 description: "A deep dive into Google's Search Generative Experience (SGE) and what your business needs to do to stay visible in the new era of search."
 ---
 

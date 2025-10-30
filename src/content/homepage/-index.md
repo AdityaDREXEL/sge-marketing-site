@@ -65,9 +65,9 @@ services:
   - title: "High-Performance Website Development"
     content: "We design and build fast, secure, and user-friendly websites optimized for search engines and conversions. Using modern technologies, we create platforms that grow with your business."
     images:
-      - "/images/service-slide-1.png"
-      - "/images/service-slide-2.png"
-      - "/images/service-slide-3.png"
+      - "/images/astro.webp"
+      - "/images/astro1.webp"
+      - "/images/astro2.png"
     button:
       enable: true
       label: See Our Work
@@ -76,19 +76,13 @@ services:
   - title: "Strategic Digital Advertising"
     content: "Reach your target audience effectively with data-driven ad campaigns on platforms like Google and Meta. We manage everything from targeting and budget optimization to creative and performance tracking."
     images:
-      - "/images/service-slide-1.png"
-      - "/images/service-slide-2.png"
-      - "/images/service-slide-3.png"
+      - "/images/gads.png"
+      - "/images/meta.jpg"
+      - "/images/metaapps.webp"
     button:
       enable: true
       label: Get Started
       link: /contact
-
-# workflow
-workflow:
-  title: "A Proven Process for Delivering Results"
-  # Image removed as requested
-  description: ""
 
 # call_to_action
 call_to_action:

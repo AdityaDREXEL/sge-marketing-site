@@ -2,7 +2,7 @@
 title: "Beyond the Boost: The Power of Strategic Ad Campaigns"
 date: 2025-08-08
 author: "SGE Analytics Team"
-image: "/images/service-slide-3.png" # Placeholder image
+image: "/images/gads.png" # Placeholder image
 description: "Learn how targeted, data-driven ad campaigns on platforms like Google and Meta can deliver a significant return on investment."
 ---
 

@@ -2,7 +2,7 @@
 title: "The Importance of SEO in Digital Marketing"
 date: 2025-08-10
 author: "SGE Analytics Team"
-image: "/images/service-slide-1.png" # You can use a relevant placeholder image
+image: "/images/DM.webp" # You can use a relevant placeholder image
 description: "Discover why Search Engine Optimization (SEO) is the cornerstone of any successful digital marketing strategy and how it drives organic growth."
 ---
 
