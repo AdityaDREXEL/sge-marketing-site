@@ -23,7 +23,7 @@
       "menu": [
         {
           "text": "About Us",
-          "url": "/services"
+          "url": "/#services"
         },
         {
           "text": "Contact",
