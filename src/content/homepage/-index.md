@@ -13,19 +13,19 @@ banner:
 feature:
   title: "Our Core Services"
   features:
-    - name: "SEO & SGE for Web Search"
+    - name: "SGE Marketing & Technical SEO"
       icon: "/images/seo.png"
-      content: "Dominate traditional search results and the new Search Generative Experience (SGE)."
-    - name: "Website Making"
+      content: "Expert SGE Marketing for Google's AI Overview, backed by foundational SEO to secure your rank."
+    - name: "High-Performance Website Development"
       icon: "/images/web.png"
-      content: "High-performance, secure websites built with the structured data needed to feed AI models."
-    - name: "AI Chatbot Search"
+      content: "High-performance, secure websites built with the structured data needed to feed AI models and rank in AI Overview."
+    - name: "AI Chatbot Search Optimization"
       icon: "/images/ai.png"
-      content: "Appear on AI model searches such as Chatgpt, Gemini, Perplexity."
-    - name: "Online Presence & Ads Run"
+      content: "We get your brand recommended by AI models. Appear on searches in ChatGPT, Gemini, and Perplexity."
+    - name: "Strategic Ad Campaigns & Online Presence"
       icon: "/images/ads.png"
-      content: "Build your brand's authority and drive leads with strategic ad campaigns on Google and Meta."
-
+      content: "Build brand authority and drive qualified leads with data-driven ad campaigns on Google and Meta."
+      
 # services
 services:
   - title: "Full-Service SEO and SGE Optimization"

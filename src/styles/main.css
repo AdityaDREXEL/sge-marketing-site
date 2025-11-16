@@ -23,3 +23,51 @@
   @import "./buttons.css";
 }
 
+/* --- Mobile Navigation Fix --- */
+@media (max-width: 767px) { /* Corresponds to md: breakpoint */
+  
+  /* Hide menu by default */
+  #nav-menu {
+    display: none;
+  }
+  
+  /* Hide the 'X' button by default */
+  #hide-button {
+    display: none;
+  }
+
+  /* When the checkbox is checked... */
+
+  /* Show the 'X' button */
+  #nav-toggle:checked ~ #hide-button {
+    display: flex;
+  }
+  
+  /* Hide the Hamburger button */
+  #nav-toggle:checked ~ #show-button {
+    display: none;
+  }
+
+  /* Show the mobile menu wrapper */
+  #nav-toggle:checked ~ #nav-menu {
+    display: block;
+    position: absolute;
+    top: 70px; /* Adjust as needed for your header height */
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #000; /* Match your header background */
+    padding: 1.5rem;
+    z-index: 99;
+    
+    /* Make it fill the screen */
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  
+  /* Style the menu items for vertical layout */
+  #nav-menu .nav-item {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+}

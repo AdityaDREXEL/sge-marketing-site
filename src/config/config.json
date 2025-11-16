@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "SGE Analytics",
+    "title": "SGE Marketing | AI Overview & SEO Experts",
     "base_url": "https://www.sgemarketing.biz",
     "base_path": "/",
     "trailing_slash": false,
@@ -8,7 +8,7 @@
     "logo": "/images/logo.png",
     "logo_width": "125",
     "logo_height": "auto",
-    "logo_text": "SGE Analytics"
+    "logo_text": "SGE Marketing"
   },
 
   "settings": {
@@ -25,13 +25,13 @@
   "params": {
     "contact_form_action": "",
     "tag_manager_id": "",
-    "footer_content": "SGE Analytics specializes in comprehensive digital strategies to elevate your online presence and drive measurable results.",
-    "copyright": "Copyright © 2025 SGE Analytics"
+    "footer_content": "SGE Marketing specializes in comprehensive digital strategies to elevate your online presence and drive measurable results.",
+    "copyright": "© SGE Marketing"
   },
 
   "metadata": {
-    "meta_author": "SGE Analytics",
+    "meta_author": "SGE Marketing",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Data-Driven Digital Marketing for Measurable Growth. We specialize in SEO, SGE, website development, and advanced analytics."
+    "meta_description": "SGE Marketing is a modern agency specializing in AI Overview optimization, SGE strategy, and technical SEO to drive growth."
   }
 }

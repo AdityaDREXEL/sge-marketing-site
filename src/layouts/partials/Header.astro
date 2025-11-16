@@ -20,28 +20,33 @@ const { main }: { main: NavigationLink[] } = menu;
 ---
 
 <header class="header">
-  <nav class="navbar container">
+  {/* --- I'VE ADDED flex justify-between items-center HERE --- */}
+  <nav class="navbar container flex justify-between items-center">
     <div class="navbar-left">
       <Logo />
     </div>
 
     <input id="nav-toggle" type="checkbox" class="hidden" />
+    
+    {/* --- UPDATED THIS LABEL (removed -mr-4) --- */}
     <label
       id="show-button"
       for="nav-toggle"
-      class="order-2 flex cursor-pointer items-center md:hidden"
+      class="order-2 flex cursor-pointer items-center md:hidden ml-auto text-white"
     >
-      <svg class="h-6 fill-current" viewBox="0 0 20 20">
+      <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20">
         <title>Menu Open</title>
         <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
       </svg>
     </label>
+    
+    {/* --- AND UPDATED THIS LABEL (removed -mr-4) --- */}
     <label
       id="hide-button"
       for="nav-toggle"
-      class="order-2 cursor-pointer items-center md:hidden"
+      class="order-2 cursor-pointer items-center md:hidden ml-auto text-white"
     >
-      <svg class="h-6 fill-current" viewBox="0 0 20 20">
+      <svg class="h-6 w-6 fill-current" viewBox="0 0 20 20">
         <title>Menu Close</title>
         <polygon
           points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
@@ -49,6 +54,7 @@ const { main }: { main: NavigationLink[] } = menu;
       </svg>
     </label>
 
+    {/* --- UPDATED MENU --- */}
     <ul id="nav-menu" class="navbar-center">
       {
         main.map((menu) => (
@@ -66,10 +72,58 @@ const { main }: { main: NavigationLink[] } = menu;
           </li>
         ))
       }
+      {/* --- ICONS FOR MOBILE (MOVED HERE) --- */}
+      <li class="nav-item mt-6 md:hidden">
+        <div class="flex items-center justify-center space-x-6">
+          {/* Instagram Link */}
+          <a
+            href="https://www.instagram.com/sgemarketing_/"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white transition duration-200 hover:text-primary-hover"
+          >
+            <svg
+              class="h-7 w-7"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          {/* Email Link */}
+          <a
+            href="mailto:addiesinha03@gmail.com"
+            aria-label="Email Us"
+            class="text-white transition duration-200 hover:text-primary-hover"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-8 w-8"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+              />
+            </svg>
+          </a>
+        </div>
+      </li>
     </ul>
 
-    {/* --- UPDATED THIS SECTION --- */}
-    <div class="navbar-right flex items-center space-x-4">
+    {/* --- ICONS FOR DESKTOP (HIDDEN ON MOBILE) --- */}
+    <div class="navbar-right hidden items-center space-x-4 md:flex">
       {/* Instagram Link */}
       <a
         href="https://www.instagram.com/sgemarketing_/"
@@ -92,7 +146,6 @@ const { main }: { main: NavigationLink[] } = menu;
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
       </a>
-      
       {/* Email Link */}
       <a
         href="mailto:addiesinha03@gmail.com"
@@ -115,7 +168,5 @@ const { main }: { main: NavigationLink[] } = menu;
         </svg>
       </a>
     </div>
-    {/* --- END OF UPDATED SECTION --- */}
-
   </nav>
 </header>
