@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import Base from "@/layouts/Base.astro"; // Correct path in original project
-import Cta from "@/layouts/components/Cta.astro"; // Assuming this exists in original project
-import Post from "@/layouts/partials/Post.astro"; // Assuming this exists in original project
-import { getSinglePage } from "@/lib/contentParser.astro"; // Assuming this exists in original project
-import { sortByDate } from "@/lib/utils/sortFunctions"; // Assuming this exists in original project
+import Base from "@/layouts/Base.astro";
+import Cta from "@/layouts/components/Cta.astro";
+import Post from "@/layouts/partials/Post.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
 import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -28,45 +28,40 @@ const recentPosts = sortedPosts.slice(0, 3);
 ---
 
 <Base>
-  {/* Banner Section - Split Layout */}
-  <section class="hero-section">
-    {/* Left Side: Text Content */}
-    <div class="hero-content-wrapper">
-      <h1 class="font-primary font-bold">{banner?.title}</h1>
+  {/* Corrected Banner Section - New Kodec-style Layout */}
+  <section class="hero-section new-hero-layout py-24 md:py-32 text-center relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('/images/'); background-size: 20px 20px;"></div> {/* Dotted background */}
+    <div class="container mx-auto px-4 relative z-10">
+      <h1 class="font-primary font-bold text-4xl md:text-6xl max-w-4xl mx-auto leading-tight">
+        {banner?.title}
+      </h1>
       {banner?.content && (
-        <div
-          class="mt-4 text-text-dark hero-content"
-          set:html={banner.content}
-        />
+        <div class="mt-6 text-text-dark hero-content" set:html={banner.content} />
       )}
-      {/* Button removed from here as per previous request */}
-    </div>
-    {/* Right Side: Image Background */}
-    <div
-      class="hero-image-wrapper"
-      style={`background-image: url(/images/header.png)`} {/* Using header.png */}
-    >
+      {/* Button is now a full-width bar below */}
     </div>
   </section>
 
-  {/* CTA Bar */}
-  <a
-    href={banner?.button?.link ?? '/contact'}
-    class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
-  >
-    {banner?.button?.label ?? 'Contact Us'}
-  </a>
-
+  {/* Full-width "Get Your AI Report" Bar */}
+  {banner?.button?.enable && (
+    <a
+      href={banner.button.link}
+      class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
+    >
+      {banner.button.label}
+    </a>
+  )}
+  
   {/* Features Section (Our Core Services) */}
-  <section class="section bg-light py-16 md:py-20"> {/* Added padding */}
-    <div class="container mx-auto px-4"> {/* Added container */}
+  <section id="services" class="section bg-light py-16 md:py-20">
+    <div class="container mx-auto px-4">
       <div class="text-center">
         <h2 class="font-primary font-bold text-3xl md:text-4xl">{feature?.title}</h2>
       </div>
-      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"> {/* Adjusted mt */}
+      <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
         {feature?.features?.map((item) => (
           <div
-            class="feature-card group rounded-xl bg-white p-6 pb-8 text-center text-text transition-colors duration-300 ease-in-out hover:bg-primary-hover hover:text-white" {/* Orange hover */}
+            class="feature-card group rounded-xl bg-white p-6 pb-8 text-center text-text transition-colors duration-300 ease-in-out hover:bg-primary-hover hover:text-white"
           >
             {item.icon && (
               <div>
@@ -89,7 +84,66 @@ const recentPosts = sortedPosts.slice(0, 3);
     </div>
   </section>
 
-  {/* Services Section (Keep original template structure) */}
+  {/* "Your Buyers Aren'T Googling Anymore" Section */}
+  <section class="section bg-white py-16 md:py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="font-primary font-bold text-4xl md:text-5xl">
+          Your Buyers & Customers <span style="text-decoration: underline; text-decoration-color: red;">Aren't</span> just Googling Anymore
+        </h2>
+        <p class="mt-4 text-lg text-gray-700">
+          They're asking ChatGPT, Perplexity, and Google AI. The companies that show up
+          in these answers with authoritative information are the ones making shortlists.
+        </p>
+      </div>
+
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Card 1: ChatGPT */}
+        <div class="rounded-xl border border-gray-200 p-6 transition-transform duration-300 hover:scale-105">
+          <p class="font-bold text-sm text-gray-500">CHATGPT</p>
+          <p class="font-primary font-bold text-5xl mt-2">200M+</p>
+          <p class="mt-3 text-gray-700">
+            Weekly active users asking AI for business recommendations and information.
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200 p-6 transition-transform duration-300 hover:scale-105">
+          <p class="font-bold text-sm text-gray-500">GOOGLE AI OVERVIEWS</p>
+          <p class="font-primary font-bold text-5xl mt-2">1B+</p>
+          <p class="mt-3 text-gray-700">
+            Monthly queries now get AI-generated answers before traditional search results.
+          </p>
+        </div>
+        <div class="rounded-xl border border-gray-200 p-6 transition-transform duration-300 hover:scale-105">
+          <p class="font-bold text-sm text-gray-500">PERPLEXITY</p>
+          <p class="font-primary font-bold text-5xl mt-2">100M+</p>
+          <p class="mt-3 text-gray-700">
+            Monthly searches where users expect direct AI answers with citations.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 max-w-4xl mx-auto rounded-2xl bg-blue-50 border border-blue-200 p-8 text-center">
+        <h3 class="font-primary font-bold text-3xl">
+          This is the 1998 moment for AI search.
+        </h3>
+        <p class="mt-4 text-lg text-blue-900">
+          The companies building authoritative, machine-readable data now are the ones
+          dominating AI answers tomorrow. Just like SEO early movers, they're capturing
+          visibility and mindshare while others wait.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Full-width "Contact Us" Bar */}
+  <a
+    href="/contact"
+    class="block w-full bg-dark py-12 text-center font-primary text-2xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
+  >
+    Contact Us
+  </a>
+
+  {/* Services Section */}
   {
     services?.map((service, index) => {
       const isOdd = index % 2 > 0;
@@ -154,18 +208,9 @@ const recentPosts = sortedPosts.slice(0, 3);
     })
   }
 
-  {/* Workflow Section (Keep original template structure - Image Removed) */}
-  <section class="section pb-0">
-    <div class="mb-8 text-center">
-      <h2
-        class="mx-auto max-w-[400px] font-bold leading-[44px]"
-      >{workflow?.title}</h2>
-      <p class="mt-3">{workflow?.description}</p>
-    </div>
-    {/* Removed the Image component that was here */}
-  </section>
+  {/* Workflow Section - REMOVED */}
 
-  {/* Recent Blog Posts Section (Keep original template structure) */}
+  {/* Recent Blog Posts Section */}
   <section class="section">
     <div class="container">
       <div class="text-center">
@@ -177,28 +222,92 @@ const recentPosts = sortedPosts.slice(0, 3);
       <div class="row mt-12 justify-center">
         {recentPosts.map((post) => (
           <div class="col-12 mb-8 sm:col-6 lg:col-4">
-            <Post post={post} /> {/* Assumes Post component exists and works */}
+            <Post post={post} />
           </div>
         ))}
       </div>
-       {/* Removed the extra "View All Posts" bar */}
     </div>
   </section>
 
-  {/* Call to Action Section (Keep original template structure) */}
-  <Cta cta={call_to_action} /> {/* Assumes Cta component exists and works */}
+  {/* Contact Form Section (Replaces CTA) */}
+  <section id="contact" class="section bg-light py-16 md:py-20">
+    <div class="container mx-auto px-4">
+      {/* Section Header */}
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="font-primary font-bold text-4xl md:text-5xl">Contact Us</h2>
+        <p class="mt-4 text-lg text-gray-700">
+          Have a question or ready to start a project? We'd love to hear from you.
+        </p>
+      </div>
+
+      {/* Form Container */}
+      <div class="mt-16 max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg">
+        <h3 class="font-primary font-bold text-3xl text-center">Get a Free Consultation</h3>
+        <p class="mt-3 text-center text-gray-700">
+          Fill out the form below, or email us directly at <a href="mailto:contact@sgeanalytics.com" class="text-primary hover:underline">contact@sgeanalytics.com</a>.
+        </p>
+
+        {/* --- THIS IS THE UPDATED FORM --- */}
+        <form 
+          action="https://formspree.io/f/mpwkjwwd" 
+          method="POST" 
+          class="mt-8 space-y-6"
+        >
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="John Doe"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              required
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="john.doe@example.com"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              required
+            />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="How can we help you?"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
+              required
+            ></textarea>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              class="w-full justify-center rounded-lg bg-dark py-4 px-6 text-center font-primary text-xl font-bold text-white transition-colors duration-300 hover:bg-primary-hover hover:text-black"
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 
 </Base>
 
 <script>
   import { Swiper } from "swiper";
-  import { Autoplay, Pagination } from "swiper/modules"; // Corrected import path
+  import { Autoplay, Pagination } from "swiper/modules";
   import "swiper/css";
   import "swiper/css/pagination";
 
-  // astro:page-load event is fired when the page is loaded
   document.addEventListener("astro:page-load", () => {
-    // Check if Swiper elements exist before initializing
     const carousels = document.querySelectorAll(".service-carousel .swiper");
     if (carousels.length > 0) {
       new Swiper(".service-carousel .swiper", {
@@ -213,57 +322,32 @@ const recentPosts = sortedPosts.slice(0, 3);
   });
 </script>
 
-{/* Custom CSS for Hero Section */}
 <style>
-  .hero-content {
-    font-family: var(--font-accent, serif);
+  /* IMPORTANT: These styles are crucial for the new hero section */
+  .hero-section.new-hero-layout {
+    background-color: #f7f8fa; /* Light grey background */
+  }
+  /* Ensure the old hero structure is completely overridden or removed */
+  .hero-section:not(.new-hero-layout) {
+    display: none; /* Hide any old hero-section not using new-hero-layout */
+  }
+
+  /* Adjustments for the content inside the new hero layout */
+  .hero-section .hero-content {
+    font-family: var(--font-accent, serif); /* Apply accent font to the p tag */
     font-weight: 400;
   }
-  .hero-section {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-  .hero-content-wrapper {
-    padding: 5rem 2rem;
-    text-align: center;
-  }
-  .hero-image-wrapper {
-    display: none;
-    background-color: #2d3238; /* Dark Grey background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @media (min-width: 768px) {
-    .hero-section {
-      grid-template-columns: 1fr 1fr;
-    }
-    .hero-content-wrapper {
-      padding: 5rem;
-      text-align: left;
-    }
-    .hero-image-wrapper {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      min-height: 40vh;
-    }
-    .hero-image-wrapper img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-  }
-  /* Basic container/section styles if needed */
+
+  /* General container/section styles */
   .container {
      max-width: 1140px;
      margin-left: auto;
      margin-right: auto;
-     padding-left: 1rem; /* Add some padding */
-     padding-right: 1rem; /* Add some padding */
+     padding-left: 1rem;
+     padding-right: 1rem;
   }
    .section {
-      padding-top: 4rem; /* Add vertical padding */
-      padding-bottom: 4rem; /* Add vertical padding */
+      padding-top: 4rem;
+      padding-bottom: 4rem;
   }
 </style>

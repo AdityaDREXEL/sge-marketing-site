@@ -6,7 +6,7 @@
     },
     {
       "name": "Services",
-      "url": "/services"
+      "url": "/#services"
     },
     {
       "name": "Blog",
@@ -14,7 +14,7 @@
     },
     {
       "name": "Contact",
-      "url": "/contact"
+      "url": "/#contact"
     }
   ],
   "footer": [
@@ -27,7 +27,7 @@
         },
         {
           "text": "Contact",
-          "url": "/contact"
+          "url": "/#contact"
         }
       ]
     },
@@ -36,15 +36,15 @@
       "menu": [
         {
           "text": "SEO & SGE",
-          "url": "/services"
+          "url": "/#services"
         },
         {
           "text": "Analytics",
-          "url": "/services#analytics"
+          "url": "/#services"
         },
         {
           "text": "Website Development",
-          "url": "/services#web-dev"
+          "url": "/#services"
         }
       ]
     },

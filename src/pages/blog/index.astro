@@ -1,21 +1,22 @@
 ---
-import { Image } from "astro:assets";
-import Base from "@/layouts/Base.astro"; // Use original layout
-import Post from "@/layouts/partials/Post.astro"; // Use original Post partial
-import Pagination from "@/layouts/components/Pagination.astro"; // Use original Pagination
-import { getSinglePage } from "@/lib/contentParser.astro"; // Use original lib functions
-import { sortByDate } from "@/lib/utils/sortFunctions";
-import { getEntry } from "astro:content";
-import type { CollectionEntry } from "astro:content";
+import Base from "@/layouts/Base.astro";
+import Post from "@/layouts/partials/Post.astro";
+import Pagination from "@/layouts/components/Pagination.astro";
+import { getCollection } from "astro:content";
 import config from "@/config/config.json";
 
-// Fetch all blog posts
-const posts = await getSinglePage("blog");
-const sortedPosts = sortByDate(posts);
+// Fetch all blog posts, filter drafts AND -index, and sort by date
+const allPosts = await getCollection("blog", ({ data, id }) => { // Added 'id'
+  // ADD THIS FILTER to ignore drafts and the -index file
+  return data.draft !== true && id !== "-index";
+});
+const sortedPosts = allPosts.sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
 
 // Pagination
-const totalPages = Math.ceil(posts.length / config.settings.pagination);
-const currentPosts = sortedPosts.slice(0, config.settings.pagination); // Show first page
+const totalPages = Math.ceil(sortedPosts.length / config.settings.pagination);
+const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 ---
 
 <Base>

@@ -5,8 +5,8 @@ import { markdownify } from "@/lib/utils/textConverter";
 const { cta } = Astro.props;
 ---
 
-<section class="section px-4">
-  <div class="section container rounded-xl shadow">
+<section class="section px-4 pt-0"> {/* <-- ADDED pt-0 HERE */}
+  <div class="section container rounded-xl shadow py-12 px-8"> {/* Added padding here from previous step */}
     <div class="row mx-auto items-center justify-center">
       <div class="md:col-5 lg:col-4">
         <Image

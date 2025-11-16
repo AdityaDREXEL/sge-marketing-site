@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import config from "@/config/config.json";
-import { plainify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
 
 const { summary_length } = config.settings;
@@ -25,14 +24,16 @@ const { post } = Astro.props;
   }
   <div class="flex flex-grow flex-col p-6">
     <h3 class="mb-4 text-xl font-bold">
-      <a href={`/blog/${post.id}`} class="hover:text-primary"> {/* CHANGED to post.id */}
+      {/* CHANGE THIS LINK to use post.id */}
+      <a href={`/blog/${post.id}`} class="hover:text-primary">
         {post.data.title}
       </a>
     </h3>
     <p class="mb-6 flex-grow text-text">
-      {plainify(post.data.description || post.body.slice(0, summary_length))}
+      {post.data.description}
     </p>
-    <a href={`/blog/${post.id}`} class="btn btn-primary mt-auto self-start"> {/* CHANGED to post.id */}
+    {/* CHANGE THIS LINK to use post.id */}
+    <a href={`/blog/${post.id}`} class="btn btn-primary mt-auto self-start">
       Read More
     </a>
   </div>
