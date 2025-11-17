@@ -19,7 +19,7 @@
   "nav_button": {
     "enable": true,
     "label": "Get Started",
-    "link": "/contact"
+    "link": "/#contact"
   },
 
   "params": {
@@ -31,7 +31,7 @@
 
   "metadata": {
     "meta_author": "SGE Marketing",
-    "meta_image": "/images/og-image.png",
+    "meta_image": "/images/logo.png",
     "meta_description": "SGE Marketing is a modern agency specializing in AI Overview optimization, SGE strategy, and technical SEO to drive growth."
   }
 }
