@@ -2,8 +2,8 @@
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
-import Footer from "@/partials/Footer.astro";
-import Header from "@/partials/Header.astro";
+import Footer from "@/layouts/partials/Footer.astro"; // Verified path based on previous screenshots
+import Header from "@/layouts/partials/Header.astro"; // Verified path based on previous screenshots
 import "@/styles/main.css";
 import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
@@ -35,6 +35,14 @@ const { title, meta_title, description, image, noindex, canonical } =
 <!doctype html>
 <html lang="en">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-80FR3E1TRL"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-80FR3E1TRL');
+    </script>
     <link rel="shortcut icon" href={config.site.favicon} />
     <meta name="theme-name" content="bigspring-light-astro" />
     <meta name="msapplication-TileColor" content="#000000" />
@@ -66,10 +74,9 @@ const { title, meta_title, description, image, noindex, canonical } =
           src: [],
           preload: false,
           display: "swap",
-          name: "Times New Roman", // Changed font name
-          fallback: "serif",       // Changed fallback to serif
+          name: "Times New Roman",
+          fallback: "serif",
           cssVariable: "font-accent",
-          // Removed googleFontsURL as Times New Roman is often a system font
         },
       ]}
     />
